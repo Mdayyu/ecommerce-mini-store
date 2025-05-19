@@ -1,23 +1,19 @@
 import { useState } from "react";
 
-export function useCustomerLogin() {
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+export const useCustomerLogin = () => {
+  const [name, setName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Add actual login/register logic here
-    console.log({ name, password, email });
+  const handleLogin = (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log("Login:", { name, password });
   };
 
   return {
     name,
-    setName,
     password,
+    setName,
     setPassword,
-    email,
-    setEmail,
-    handleSubmit,
+    handleLogin,
   };
-}
+};

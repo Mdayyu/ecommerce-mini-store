@@ -1,4 +1,4 @@
-import { useCustomerLogin } from "./hook/useCustomerLogin";
+import { useCustomerSignUp } from "./hook/useCustomerSignUp";
 import {
   Box,
   Button,
@@ -8,12 +8,20 @@ import {
   Typography,
 } from "@mui/material";
 
-const CustomerLogin = () => {
-  const { name, password, setName, setPassword, handleLogin } = useCustomerLogin();
+const CustomerSignUp = () => {
+  const {
+    name,
+    email,
+    password,
+    setName,
+    setEmail,
+    setPassword,
+    handleSignUp,
+  } = useCustomerSignUp();
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      {/* KIRI - Form */}
+      {/* KIRI - Form Sign Up */}
       <Grid
         item
         xs={12}
@@ -27,12 +35,13 @@ const CustomerLogin = () => {
       >
         <Box
           component="form"
-          onSubmit={handleLogin}
+          onSubmit={handleSignUp}
           sx={{ width: "70%", maxWidth: 400 }}
         >
           <Typography component="h1" variant="h4" gutterBottom>
-            Login
+            Sign Up
           </Typography>
+
           <TextField
             margin="normal"
             required
@@ -41,6 +50,17 @@ const CustomerLogin = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
           <TextField
             margin="normal"
             required
@@ -50,13 +70,14 @@ const CustomerLogin = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, bgcolor: "#fdd835", color: "black" }}
           >
-            Login
+            Sign Up
           </Button>
         </Box>
       </Grid>
@@ -67,7 +88,7 @@ const CustomerLogin = () => {
         xs={false}
         sm={6}
         sx={{
-          backgroundImage: "url('https://source.unsplash.com/featured/?food')",
+          backgroundImage: "url('https://source.unsplash.com/featured/?signup,people')",
           backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>
             t.palette.mode === "light"
@@ -81,4 +102,4 @@ const CustomerLogin = () => {
   );
 };
 
-export default CustomerLogin;
+export default CustomerSignUp;
