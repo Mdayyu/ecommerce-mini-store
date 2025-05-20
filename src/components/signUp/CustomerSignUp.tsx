@@ -1,3 +1,4 @@
+import React from "react";
 import { useCustomerSignUp } from "./hook/useCustomerSignUp";
 import {
   Box,
@@ -8,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const CustomerSignUp = () => {
+const CustomerSignUp: React.FC = () => {
   const {
     name,
     email,
@@ -21,7 +22,7 @@ const CustomerSignUp = () => {
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      {/* KIRI - Form Sign Up */}
+      {/* Form Sign Up */}
       <Grid
         item
         xs={12}
@@ -48,7 +49,9 @@ const CustomerSignUp = () => {
             fullWidth
             label="Name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setName(e.target.value)
+            }
           />
 
           <TextField
@@ -58,7 +61,9 @@ const CustomerSignUp = () => {
             label="Email"
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setEmail(e.target.value)
+            }
           />
 
           <TextField
@@ -68,7 +73,9 @@ const CustomerSignUp = () => {
             label="Password"
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setPassword(e.target.value)
+            }
           />
 
           <Button
@@ -82,18 +89,18 @@ const CustomerSignUp = () => {
         </Box>
       </Grid>
 
-      {/* KANAN - Gambar */}
+      {/* Gambar di kanan */}
       <Grid
         item
         xs={false}
         sm={6}
         sx={{
-          backgroundImage: "url('https://source.unsplash.com/featured/?signup,people')",
+          backgroundImage: `url('https://media.istockphoto.com/id/1447845897/photo/penjual-online-wanita-dan-pria-asia-menyiapkan-kotak-parsel-dan-memeriksa-pesanan.jpg')`,
           backgroundRepeat: "no-repeat",
-          backgroundColor: (t) =>
-            t.palette.mode === "light"
-              ? t.palette.grey[100]
-              : t.palette.grey[900],
+          backgroundColor: (theme) =>
+            theme.palette.mode === "light"
+              ? theme.palette.grey[100]
+              : theme.palette.grey[900],
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

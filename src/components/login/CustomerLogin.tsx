@@ -9,7 +9,16 @@ import {
 } from "@mui/material";
 
 const CustomerLogin = () => {
-  const { name, password, setName, setPassword, handleLogin } = useCustomerLogin();
+ const {
+  name,
+  password,
+  confirmPassword,
+  setName,
+  setPassword,
+  setConfirmPassword,
+  handleRegister, 
+} = useCustomerLogin();
+
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
@@ -27,11 +36,11 @@ const CustomerLogin = () => {
       >
         <Box
           component="form"
-          onSubmit={handleLogin}
+          onSubmit={handleRegister}
           sx={{ width: "70%", maxWidth: 400 }}
         >
           <Typography component="h1" variant="h4" gutterBottom>
-            Login
+            Register
           </Typography>
           <TextField
             margin="normal"
@@ -50,13 +59,22 @@ const CustomerLogin = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Confirm Password"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, bgcolor: "#fdd835", color: "black" }}
           >
-            Login
+            Register
           </Button>
         </Box>
       </Grid>
@@ -67,7 +85,7 @@ const CustomerLogin = () => {
         xs={false}
         sm={6}
         sx={{
-          backgroundImage: "url('https://source.unsplash.com/featured/?food')",
+          backgroundImage: "url('https://images.unsplash.com/photo-1581091870622-2f56c8de8f45')",
           backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>
             t.palette.mode === "light"

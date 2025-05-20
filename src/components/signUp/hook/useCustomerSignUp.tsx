@@ -5,10 +5,10 @@ export const useCustomerSignUp = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleSignUp = (event: React.FormEvent) => {
+  const handleSignUp = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Sign Up:", { name, email, password });
-    // Tambahkan validasi atau panggilan API Sign Up di sini
+    // TODO: Tambahkan validasi dan panggilan API Sign Up di sini
   };
 
   return {
