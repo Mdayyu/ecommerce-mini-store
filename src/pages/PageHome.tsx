@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHomePage } from '../hooks/useHomePage';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import {
   Container,
   Grid,
@@ -12,18 +11,26 @@ import {
   Chip,
   CircularProgress,
   Alert,
-  Collapse,
   IconButton,
   Tooltip,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button
 } from '@mui/material';
-
 
 const PageHome: React.FC = () => {
   const { products, loading, error } = useHomePage();
-  const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [openProductId, setOpenProductId] = useState<number | null>(null);
 
-  const toggleExpand = (id: number) => {
-    setExpandedId(prev => (prev === id ? null : id));
+  const handleOpen = (id: number) => {
+    setOpenProductId(id);
+  };
+
+  const handleClose = () => {
+    setOpenProductId(null);
   };
 
   if (loading)
@@ -41,17 +48,17 @@ const PageHome: React.FC = () => {
     );
 
   return (
-    <Container sx={{ mt: 4 }}>
+    <Container maxWidth="sm">
       <Typography variant="h4" align="center" gutterBottom>
         🛍️ Product List
       </Typography>
       <Grid container spacing={4}>
         {products.map(product => {
-          const isExpanded = expandedId === product.id;
+          const isOpen = openProductId === product.id;
 
           return (
-            <Grid item xs={12} sm={6} md={4} key={product.id}>
-              <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <Grid item xs={12} key={product.id}>
+              <Card sx={{ height: 380, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <CardMedia
                   component="img"
                   image={product.image}
@@ -76,19 +83,23 @@ const PageHome: React.FC = () => {
                     ${product.price}
                   </Typography>
 
-                  <Collapse in={isExpanded} timeout="auto" unmountOnExit>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                      {product.description}
-                    </Typography>
-                  </Collapse>
-
-                  <IconButton onClick={() => toggleExpand(product.id)} size="small">
-                    {isExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                  <IconButton onClick={() => handleOpen(product.id)} size="small">
+                    <ExpandMoreIcon />
                   </IconButton>
 
                   <Chip label={product.category} variant="outlined" size="small" sx={{ mt: 1 }} />
                 </CardContent>
               </Card>
+
+              <Dialog open={isOpen} onClose={handleClose}>
+                <DialogTitle>{product.title}</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>{product.description}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} autoFocus>Close</Button>
+                </DialogActions>
+              </Dialog>
             </Grid>
           );
         })}

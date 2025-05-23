@@ -19,7 +19,7 @@ export const useHomePage = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get<Product[]>(
-          `${import.meta.env.VITE_APP_BACKEND_URL_BASE}/products`,
+          `${import.meta.env.VITE_APP_BACKEND_URL_BASE_1}/products`,
           { timeout: 10000 }
         );
         setProducts(response.data);
